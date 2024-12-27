@@ -20,6 +20,7 @@ abstract class Department {
 // const accounting = new Department("C4", "Accounting");
 // Error cannot creat instance of an abstract class
 
+// Inheritance
 class ITDepartment extends Department {
   constructor(id: string, private reports: string[] = []) {
     super(id, "Akademi");
@@ -35,5 +36,5 @@ class ITDepartment extends Department {
 }
 
 const akademi = new ITDepartment("C4");
-akademi.describe(); 
+akademi.describe();
 // Department ID: C4
