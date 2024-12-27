@@ -45,10 +45,10 @@ class AccountingDepartment extends Department {
 
   // Static method to get the single instance
   static getInstance() {
-    if(AccountingDepartment.instance) {
+    if (AccountingDepartment.instance) {
       return this.instance;
     }
-    this.instance = new AccountingDepartment('AC7');
+    this.instance = new AccountingDepartment("AC7");
     return this.instance;
   }
 
@@ -57,10 +57,10 @@ class AccountingDepartment extends Department {
   }
 }
 
-// const accounting = new AccountingDepartment; 
+// const accounting = new AccountingDepartment;
 // Error Constructor private
 const accounting = AccountingDepartment.getInstance();
 const accounting2 = AccountingDepartment.getInstance();
 
-console.log(accounting === accounting2); 
+console.log(accounting === accounting2);
 // true
