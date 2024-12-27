@@ -46,11 +46,9 @@ const accounting = new Department("C4", "Accounting");
 accounting.describe(); // this-> accounting
 // Department (C4): Accounting
 
-
 const accountingCopy = { describe: accounting.describe };
 accountingCopy.describe(); // this-> accountingCopy, Not have props name and id
 // Department (undefined): undefined
-
 
 /** <============================================================================> */
 
