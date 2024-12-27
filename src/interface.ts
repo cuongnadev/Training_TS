@@ -3,7 +3,7 @@ interface Named {
   outputName?: string;
 }
 
-interface Person extends Named{
+interface Person extends Named {
   age: number;
 
   introduce(): void;
@@ -16,7 +16,7 @@ user = {
   introduce(): void {
     console.log(`Hi, my name is ${this.name} and I'm ${this.age} years old.`);
   },
-}
+};
 // user.name = "Coi"; error properties name readonly
 user.introduce();
 
