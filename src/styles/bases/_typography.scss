@@ -1,0 +1,28 @@
+@font-face {
+    font-family: Poppins;
+    src: url('../../../src/assets/fonts/Poppins-Regular.ttf');
+}
+
+body {
+    font-family: $font-primary;
+    color: $Text;
+}
+
+@mixin font($font-size, $font-weight) {
+    font-size: $font-size;
+    font-weight: $font-weight;
+    font-style: normal;
+    line-height: normal;
+}
+
+@mixin font-heading($font-size) {
+    @include font($font-size, $font-heading);
+    font-family: $font-primary;
+}
+
+@mixin font-button {
+    @include font($text-sm, $font-regular);
+    font-family: $font-primary;
+    letter-spacing: 0.25px;
+    text-transform: capitalize;
+}
