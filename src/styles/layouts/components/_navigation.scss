@@ -1,0 +1,68 @@
+.nav {
+    &_container {
+        width: $navsidebar-width;
+        min-height: 100vh;
+        padding-bottom: 20px;
+        background-color: $Purple;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    &-logo_container {
+        padding: 32px 36px 32px 22px;
+
+        & .logo {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        & span {
+            @include font-heading($text-2xl);
+            color: $White;
+        }
+    }
+
+    &-links_container {
+        padding-bottom: 40px;
+    }
+
+    &-link_container {
+        padding: 12px 20px;
+        width: 220px;
+        color: $White;
+        border-radius: 40px 0 0 40px;
+        @include font($text-sm, $font-medium);
+        transition: background-color 0.4s linear;
+    }
+
+    &-link_container:hover, &-link_container.active {
+        background-color: $Background;
+        color: $Purple;
+
+        & span svg path {
+            fill: $Purple;
+        }
+    }
+
+    &-link_container span svg {
+        width: 32px;
+        height: 32px;
+    }
+}
+.branding-text {
+    color: $White;
+    @include font($text-sm, $font-semibold);
+}
+.credits-text {
+    color: $White;
+    @include font($text-xs, $font-regular);
+
+    & span {
+        color: $Red;
+    }
+}

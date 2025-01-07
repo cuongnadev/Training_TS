@@ -1,0 +1,21 @@
+.main-layout {
+    &_content {
+        padding: 0 26px;
+        background-color: $Background;
+        overflow-y: auto;
+    }
+    
+    // Scrollbar CSS
+    &_content::-webkit-scrollbar {
+        border-radius: 0;
+        width: 6px;
+    }
+    &_content::-webkit-scrollbar-thumb {
+        border-radius: 2px;
+        background-color: $Purple;
+    }
+    &_content::-webkit-scrollbar-track {
+        border-radius: 0;
+        background-color: $Purple-10;
+    }
+}

@@ -16,9 +16,15 @@ export default class App {
     // Thiết lập xử lý điều hướng qua các link
     private setupNavigation(): void {
         document.addEventListener("click", (event) => {
+            const navLinks = document.querySelectorAll('.nav-link_container');
             const target = event.target as HTMLAnchorElement;
             if (target.matches("a[data-router]")) {
                 event.preventDefault();
+                // Loại bỏ class active từ tất cả các link
+                navLinks.forEach((link) => link.classList.remove('active'));
+
+                // Thêm class active cho link được click
+                target.classList.add('active');
                 const path = target.getAttribute("href");
                 if (path) {
                     router.navigate(path);
