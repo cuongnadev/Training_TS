@@ -12,7 +12,7 @@ export default class MainLayout {
     constructor(rootApp: HTMLElement) {
         this.appElement = rootApp;
 
-        this.container = CreateElement('div', 'main-layout_container');
+        this.container = CreateElement('div', 'main-layout_container d-flex');
         this.appElement.appendChild(this.container);
 
         this.header = new Header();
@@ -24,12 +24,12 @@ export default class MainLayout {
         const headerElement = this.header.render();
         const navElement = this.nav.render();
         const mainElement = this.createMainContent(content);
+        const contentElement = CreateElement('div', 'main-layout_content d-flex flex-col flex-1', [headerElement, mainElement]);
 
         // Gắn các phần tử vào ứng dụng
         this.container.innerHTML = '';
-        this.container.appendChild(headerElement);
         this.container.appendChild(navElement);
-        this.container.appendChild(mainElement);
+        this.container.appendChild(contentElement);
     }
 
     updateMainContent(content: HTMLElement): void {

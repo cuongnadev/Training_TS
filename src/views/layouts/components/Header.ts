@@ -1,20 +1,25 @@
 import { Component, CreateElement } from "../../components/core";
+import { HeaderActions } from "./HeaderAction";
 
 export default class Header extends Component {
+    title!: HTMLHeadingElement;
+    headerAction!: HeaderActions;
     constructor() {
-        super('header_container');
+        super('header_container d-flex items-center justify-between');
 
         this.initContent();
     }
 
     protected initContent(): void {
-        const h1 = CreateElement('h1');
-        h1.textContent = 'My Header Application';
+        this.title = CreateElement('h1', 'header_title');
 
-        this.container.appendChild(h1);
+        this.headerAction = new HeaderActions();
+
+        this.container.append(this.title, this.headerAction.render());
     }
 
-    render() {
+    render(title: string) {
+        this.title.innerText = title;
         return this.container;
     }
 }

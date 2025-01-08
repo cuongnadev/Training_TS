@@ -25,7 +25,7 @@ import video from '~/assets/icons/Video.svg';
 import checkSuccess from '~/assets/icons/CheckSuccess.svg';
 import error from '~/assets/icons/Error.svg';
 import warning from '~/assets/icons/Warning.svg';
-import info from '~/assets/icons/Info.svg';
+import info from '~/assets/icons/InfoCircle.svg';
 import xmark from '~/assets/icons/Xmark.svg';
 import plus from '~/assets/icons/Plus.svg';
 
