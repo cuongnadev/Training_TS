@@ -1,0 +1,81 @@
+.dashboard {
+    &_container {
+        padding-bottom: 26px;
+    }
+
+    &_overviews {
+        width: 100%;
+        height: 120px;
+        border-radius: 16px;
+        background-color: $White;
+        flex-shrink: 0;
+
+        &-content {
+            padding: 20px;
+            width: 80%;
+        }
+    }
+}
+.overview_item {
+    &-title {
+        @include font($text-base, $font-regular);
+        color: $Gray-3;
+    }
+
+    &-quantity {
+        @include font-heading($text-xl);
+        color: $Text;
+    }
+
+    &-icon {
+        width: 72px;
+        height: 72px;
+        border-radius: 40px;
+        flex-shrink: 0;
+
+        & path {
+            fill: $White;
+        }
+    }
+}
+.students {
+    & .overview_item-icon {
+        background-color: $Purple;
+    }
+}
+.teachers {
+    & .overview_item-icon {
+        background-color: $Orange;
+    }
+}
+.events {
+    & .overview_item-icon {
+        background-color: $Yellow;
+
+        & path {
+            fill: $White;
+        }
+    }
+}
+.food {
+    & .overview_item-icon {
+        background-color: $Text;
+
+        & path {
+            fill: $White;
+        }
+    }
+}
+
+.school-performance_container,
+.school-calendar_container,
+.school-finance_container {
+    width: 100%;
+    & img {
+        width: 100%;
+        border-radius: 16px;
+    }
+}
+.school-operations {
+    width: 100%;
+}

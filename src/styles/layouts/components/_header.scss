@@ -4,7 +4,7 @@
     }
 
     &_title {
-        @include font-heading($text-xl);
+        @include font-heading($text-2xl);
         color: $Text;
     }
 
