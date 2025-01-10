@@ -4,6 +4,7 @@ import { HeaderActions } from "./HeaderAction";
 export default class Header extends Component {
     title!: HTMLHeadingElement;
     headerAction!: HeaderActions;
+
     constructor() {
         super('header_container d-flex items-center justify-between');
 
@@ -16,6 +17,11 @@ export default class Header extends Component {
         this.headerAction = new HeaderActions();
 
         this.container.append(this.title, this.headerAction.render());
+    }
+
+    updateNamePage(name: string): void {
+        this.title.innerText = "";
+        this.title.innerText = name;
     }
 
     render(title: string) {

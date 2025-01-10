@@ -1,0 +1,78 @@
+type HttpMethod = "GET" | "PUSH" | "PATCH" | "DELETE";
+type EndpointMethod<T = object> = (arg: T) => string;
+
+interface ApiEndpoints {
+    getStudents: EndpointMethod<void>;
+    getStudent: EndpointMethod<{ id: string }>;
+    postStudent: EndpointMethod<void>;
+    patchStudent: EndpointMethod<{ id: string }>;
+    deleteStudent: EndpointMethod<{ id: string }>;
+
+    getTeachers: EndpointMethod<void>;
+    getTeacher: EndpointMethod<{ id: string }>;
+    postTeacher: EndpointMethod<void>;
+    patchTeacher: EndpointMethod<{ id: string }>;
+    deleteTeacher: EndpointMethod<{ id: string }>;
+}
+
+const endpoints: ApiEndpoints = {
+    getStudents: () => "/api/students",
+    getStudent: ({ id }) => `/api/students/${id}`,
+    postStudent: () => "/api/students",
+    patchStudent: ({ id }) => `/api/students/${id}`,
+    deleteStudent: ({ id }) => `/api/students/${id}`,
+
+    getTeachers: () => "/api/teachers",
+    getTeacher: ({ id }) => `/api/teachers/${id}`,
+    postTeacher: () => "/api/teachers",
+    patchTeacher: ({ id }) => `/api/teachers/${id}`,
+    deleteTeacher: ({ id }) => `/api/teachers/${id}`,
+};
+
+class ApiService {
+    private baseURL: string;
+
+    constructor(baseURL: string) {
+        this.baseURL = baseURL;
+    }
+
+    async request<T, K extends keyof ApiEndpoints>(
+        method: HttpMethod,
+        endpointKey: K,
+        params: Parameters<ApiEndpoints[K]>[0],
+        searchParams?: [key: string, value: string][],
+        body?: any,
+        headers: Record<string, string> = { "Content-Type": "application/json" },
+        stringify: boolean = true,
+    ): Promise<T> {
+        try {
+            const endpointFunction = endpoints[endpointKey] as EndpointMethod<
+                Parameters<ApiEndpoints[typeof endpointKey]>[0]
+            >;
+            let url = `${this.baseURL}${endpointFunction(params)}`;
+
+            if (searchParams) {
+                const queryString = new URLSearchParams(searchParams).toString();
+                url += `?${queryString}`;
+                // url += "?" + searchParams.map((search) => search.join("=")).join("&");
+            }
+
+            const response = await fetch(url, {
+                method,
+                headers,
+                body: body ? (stringify ? JSON.stringify(body) : body) : undefined,
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`HTTP Error: ${response.status} - ${errorMessage}`);
+            }
+
+            return (await response.json()) as T;
+        } catch (error) {
+            console.error("API Request failed:", error);
+            throw error;
+        }
+    }
+}
+export default ApiService;
