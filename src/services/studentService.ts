@@ -10,8 +10,9 @@ export default class StudentService {
     /**
      * Lấy danh sách sinh viên
      */
-    async getStudents(token: string): Promise<any> {
-        return await this.apiService.request("GET", "getStudents", undefined, undefined, undefined, {
+    async getStudents(token: string, page?: number, itemsPerPage?: number): Promise<any> {
+        const params = page !== null && itemsPerPage ? { page, itemsPerPage } : undefined ;
+        return await this.apiService.request("GET", "getStudents", params, undefined, undefined, {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json"
         });

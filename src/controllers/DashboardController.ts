@@ -50,8 +50,6 @@ export class DashboardController extends Controller {
             if (data.students === 0 && data.teachers === 0) {
                 throw new Error('No data available');
             }
-
-            console.log(data);
             
             return data;
         } catch (error) {

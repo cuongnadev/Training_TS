@@ -2,7 +2,7 @@ type HttpMethod = "GET" | "PUSH" | "PATCH" | "DELETE";
 type EndpointMethod<T = object> = (arg: T) => string;
 
 interface ApiEndpoints {
-    getStudents: EndpointMethod<void>;
+    getStudents: EndpointMethod<{ page: number | undefined, itemsPerPage: number } | undefined>;
     getStudent: EndpointMethod<{ id: string }>;
     postStudent: EndpointMethod<void>;
     patchStudent: EndpointMethod<{ id: string }>;
@@ -16,7 +16,14 @@ interface ApiEndpoints {
 }
 
 const endpoints: ApiEndpoints = {
-    getStudents: () => "/api/students",
+    getStudents: (params) => {
+        console.log(params);
+        
+        if (params?.page != null && params?.itemsPerPage != null) {
+            return `/api/students?_start=${params.page}&_limit=${params.itemsPerPage}`;
+        }
+        return "/api/students";
+    },
     getStudent: ({ id }) => `/api/students/${id}`,
     postStudent: () => "/api/students",
     patchStudent: ({ id }) => `/api/students/${id}`,
@@ -39,7 +46,7 @@ class ApiService {
     async request<T, K extends keyof ApiEndpoints>(
         method: HttpMethod,
         endpointKey: K,
-        params: Parameters<ApiEndpoints[K]>[0],
+        params: Parameters<ApiEndpoints[K]>[0] | undefined,
         searchParams?: [key: string, value: string][],
         body?: any,
         headers: Record<string, string> = { "Content-Type": "application/json" },

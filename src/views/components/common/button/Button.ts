@@ -107,7 +107,6 @@ export class Button {
      * Updates both the `disabled` attribute and the visual style.
      */
     setDisabled(state: States): void {
-        this.button.disabled = !!state;
         if (state === 'disabled') {
             this.button.classList.add('disabled');
         } else {
