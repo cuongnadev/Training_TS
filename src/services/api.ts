@@ -1,8 +1,9 @@
+import search from '~/assets/icons/Search.svg';
 type HttpMethod = "GET" | "PUSH" | "PATCH" | "DELETE";
 type EndpointMethod<T = object> = (arg: T) => string;
 
 interface ApiEndpoints {
-    getStudents: EndpointMethod<{ page: number | undefined, itemsPerPage: number } | undefined>;
+    getStudents: EndpointMethod<{ page?: number, itemsPerPage?: number, search?: string } | undefined>;
     getStudent: EndpointMethod<{ id: string }>;
     postStudent: EndpointMethod<void>;
     patchStudent: EndpointMethod<{ id: string }>;
@@ -19,8 +20,12 @@ const endpoints: ApiEndpoints = {
     getStudents: (params) => {
         console.log(params);
         
-        if (params?.page != null && params?.itemsPerPage != null) {
+        if (params?.search) {
+            return `/api/students?q=${params.search}`;
+        } else if (params?.page != null && params?.itemsPerPage != null) {
             return `/api/students?_start=${params.page}&_limit=${params.itemsPerPage}`;
+        } else if (params?.search) {
+            return `/api/students?search=${params.search}`;
         }
         return "/api/students";
     },

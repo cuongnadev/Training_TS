@@ -14,10 +14,9 @@ export class StudentController extends Controller {
         initContent();
     }
 
-    async getStudentList(startItem?: number, itemsPerPage?: number) {
-        console.log(startItem, itemsPerPage);
+    async getStudentList(startItem?: number, itemsPerPage?: number, search?: string) {
         try {
-            const studentsList = await this.studentService.getStudents('my-secret-token', startItem, itemsPerPage);
+            const studentsList = await this.studentService.getStudents('my-secret-token', startItem, itemsPerPage, search);
             
             if (!studentsList) {
                 throw new Error("Không tìm thấy danh sách học sinh");
@@ -28,10 +27,8 @@ export class StudentController extends Controller {
         }
     }
 
-    async handleStudentLists(tableBody: HTMLTableSectionElement, startItem: number, limit: number) {
-        console.log(startItem, limit);
-        
-        const studentLists = await this.getStudentList(startItem, limit);
+    async handleStudentLists(tableBody: HTMLTableSectionElement, startItem: number, limit: number, search?: string) {
+        const studentLists = await this.getStudentList(startItem, limit, search);
         
         studentLists.map((student: Student) => {
             tableBody.appendChild(

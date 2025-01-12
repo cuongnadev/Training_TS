@@ -10,11 +10,15 @@ export default class StudentService {
     /**
      * Lấy danh sách sinh viên
      */
-    async getStudents(token: string, page?: number, itemsPerPage?: number): Promise<any> {
-        const params = page !== null && itemsPerPage ? { page, itemsPerPage } : undefined ;
+    async getStudents(token: string, page?: number, itemsPerPage?: number, search?: string): Promise<any> {
+        const params = search
+            ? { search }
+            : page != null && itemsPerPage != null
+              ? { page, itemsPerPage }
+              : undefined;
         return await this.apiService.request("GET", "getStudents", params, undefined, undefined, {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         });
     }
 
@@ -25,7 +29,7 @@ export default class StudentService {
     async getStudent(token: string, id: string): Promise<any> {
         return await this.apiService.request("GET", "getStudent", { id }, undefined, undefined, {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         });
     }
 
@@ -36,7 +40,7 @@ export default class StudentService {
     async postStudent(token: string, student: object): Promise<any> {
         return await this.apiService.request("PUSH", "postStudent", undefined, undefined, student, {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         });
     }
 
@@ -48,7 +52,7 @@ export default class StudentService {
     async patchStudent(token: string, id: string, updatedData: object): Promise<any> {
         return await this.apiService.request("PATCH", "patchStudent", { id }, undefined, updatedData, {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         });
     }
 
@@ -59,7 +63,7 @@ export default class StudentService {
     async deleteStudent(token: string, id: string): Promise<any> {
         return await this.apiService.request("DELETE", "deleteStudent", { id }, undefined, undefined, {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         });
     }
 }

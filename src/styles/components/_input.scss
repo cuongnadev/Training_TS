@@ -1,0 +1,22 @@
+.input {
+    @include font($text-sm, $font-regular);
+    color: $Text;
+    border: 1px solid $Gray-1;
+    outline: none;
+    border-radius: 40px;
+    padding: 12px;
+    caret-color: $Purple;
+
+    &:focus {
+        border: 1px solid $Purple;
+    }
+
+    &::placeholder {
+        color: $Text;
+        @include font($text-xs, $font-regular);
+    }
+
+    &.input-textarea {
+        border-radius: 10px;
+    }
+}

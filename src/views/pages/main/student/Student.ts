@@ -1,5 +1,6 @@
 import { StudentController } from "../../../../controllers";
 import { Pagination } from "../../../components";
+import { Input, Search, TextArea } from "../../../components/common";
 import { CreateElement, PageLayout } from "../../../components/core";
 
 const TitlesList = [
@@ -21,9 +22,10 @@ class Students extends PageLayout<StudentController> {
     studentListHeader!: HTMLTableSectionElement;
     studentListBody!: HTMLTableSectionElement;
     pagination!: Pagination;
+    toolbar!: HTMLDivElement;
 
     constructor() {
-        super('students_container', new StudentController());
+        super('students_container d-flex flex-col gap-4', new StudentController());
         this.container.setAttribute('name', 'Student');
         
         this.initData();
@@ -35,6 +37,16 @@ class Students extends PageLayout<StudentController> {
     }
 
     protected initContent(): void {
+        // toolbar
+        const searchComponent = new Search();
+
+        // Lắng nghe sự kiện 'search'
+        searchComponent.eventEmitter.on('search', (value: string) => this.updateListStudents(undefined, value));
+
+        this.toolbar = CreateElement('div', '', [
+            searchComponent.render(),
+        ]);
+
         // header table
         const checkBoxInput = CreateElement("input", "students_checkbox all");
         checkBoxInput.type = "checkbox";
@@ -56,7 +68,7 @@ class Students extends PageLayout<StudentController> {
         this.studentLists = CreateElement('div', 'students_list d-flex flex-col', [this.listStudent]);
         this.initPagination();
 
-        this.container.appendChild(this.studentLists);
+        this.container.append(this.toolbar, this.studentLists);
     }
 
     private initPagination(): void {
@@ -74,9 +86,17 @@ class Students extends PageLayout<StudentController> {
         return students ? students.length : 0;
     }
 
-    updateListStudents(currentItem: number) {
+    updateListStudents(currentItem?: number, value?: string) {
         this.studentListBody.innerHTML = "";
-        this.controller?.handleStudentLists(this.studentListBody, currentItem, this.studentPerPage);
+        if(currentItem !== undefined) {
+            this.controller?.handleStudentLists(this.studentListBody, currentItem, this.studentPerPage);
+        } else if (value?.trim()) {
+            this.controller?.handleStudentLists(this.studentListBody, currentItem!, this.studentPerPage, value);
+            this.studentLists.removeChild(this.pagination.render());
+        } else {
+            this.controller?.handleStudentLists(this.studentListBody, 0, 8)
+            this.studentLists.appendChild(this.pagination.render());
+        }
     }
 
     render() {
