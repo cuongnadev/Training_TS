@@ -7,7 +7,7 @@ export default interface Teacher extends User {
     email: string;
     phone: number;
     address: string;
-    photo: string;
+    avatar: string;
     dob: Date;
     pob: string;
     university: string;

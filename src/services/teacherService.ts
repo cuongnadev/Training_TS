@@ -11,8 +11,13 @@ export default class TeacherService {
      * Lấy danh sách giáo viên
      * @param token - Token xác thực
      */
-    async getTeachers(token: string): Promise<any> {
-        return await this.apiService.request("GET", "getTeachers", undefined, undefined, undefined, {
+    async getTeachers(token: string, page?: number, itemsPerPage?: number, search?: string): Promise<any> {
+        const params = search
+            ? { search }
+            : page != null && itemsPerPage != null
+              ? { page, itemsPerPage }
+              : undefined;
+        return await this.apiService.request("GET", "getTeachers", params, undefined, undefined, {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
         });
