@@ -14,10 +14,42 @@
         overflow-x: hidden;
     }
 
-    &_checkbox {
-        &:focus {
-            box-shadow: none;
-        }
+    &_checkbox,
+    &_table tbody tr input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+    }
+
+    &_checkbox,
+    &_table tbody tr input[type="checkbox"] {
+        position: relative;
+        border: 2px solid $Gray-2;
+        background-color: #fff;
+        -webkit-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        transition:
+            background-color 0.5s ease,
+            border-color 0.5s ease;
+    }
+
+    &_checkbox:checked,
+    &_table tbody tr input[type="checkbox"]:checked {
+        background-color: $Purple;
+        border-color: $Purple;
+    }
+
+    &_checkbox:checked::after,
+    &_table tbody tr input[type="checkbox"]:checked::after {
+        content: "\2714";
+        color: #fff;
+        font-size: $text-xs;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        line-height: 1;
     }
 
     &_table tbody tr {
@@ -120,7 +152,6 @@
     }
 
     &_table .student_grade {
-
         & span {
             width: auto;
             height: 36px;
@@ -132,7 +163,7 @@
             background-color: $Gray;
             box-shadow: $Shadow;
         }
-        
+
         &.grade-a span {
             background-color: $Orange;
         }
@@ -149,7 +180,7 @@
     &_table .student_action-more {
         padding: 0;
         border: none;
-        
+
         & .btn {
             background-color: transparent;
         }

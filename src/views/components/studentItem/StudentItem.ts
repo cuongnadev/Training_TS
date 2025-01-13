@@ -31,10 +31,19 @@ export class StudentItem {
         const checkBoxInput = CreateElement("input");
         checkBoxInput.type = "checkbox";
         this.checkbox = CreateElement("td", "student_checkbox", [checkBoxInput]);
-
+        checkBoxInput.addEventListener("change", (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target && target.checked) {
+                this.studentRow.classList.add("checked");
+            } else {
+                this.studentRow.classList.remove("checked");
+            }
+        });
         // student_user
         // avatar
         this.studentAvatar = CreateElement("img", "student_avatar");
+        console.log(this.student);
+        
         this.student.avatar ? (this.studentAvatar.src = this.student.avatar) : (this.studentAvatar.src = placeholder);
         this.studentAvatar.alt = "";
         // avatar frame
@@ -71,7 +80,10 @@ export class StudentItem {
         this.call = new Button(null, callIcon, null, "icon", "md", "student_contact-btn", "active", () => {});
         // mail
         this.mail = new Button(null, emailIcon, null, "icon", "md", "student_contact-btn", "active", () => {});
-        const contactBox = CreateElement("div", "d-flex items-center justify-start gap-4", [this.call.render(), this.mail.render()]);
+        const contactBox = CreateElement("div", "d-flex items-center justify-start gap-4", [
+            this.call.render(),
+            this.mail.render(),
+        ]);
         this.contact = CreateElement("td", "student_contact ", [contactBox]);
 
         // student Grade
@@ -79,11 +91,9 @@ export class StudentItem {
         const gradeText = CreateElement("span", "d-flex items-center justify-center");
         gradeText.innerText = this.student.class;
         const gradeBox = CreateElement("div", "d-flex items-center justify-start", [gradeText]);
-        this.studentGrade = CreateElement(
-            "td",
-            `student_grade grade-${this.student.class.slice(-1).toLowerCase()}`,
-            [gradeBox],
-        );
+        this.studentGrade = CreateElement("td", `student_grade grade-${this.student.class.slice(-1).toLowerCase()}`, [
+            gradeBox,
+        ]);
 
         // Actions
         const actionBtn = new Button(null, dotsIcon, null, "icon", "md", "", "active", () => {});
