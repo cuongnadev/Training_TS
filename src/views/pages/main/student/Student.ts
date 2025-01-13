@@ -26,7 +26,7 @@ class Students extends PageLayout<StudentController> {
     toolbar!: Toolbar;
 
     constructor() {
-        super('students_container d-flex flex-col gap-4', new StudentController());
+        super('students_container d-flex flex-col gap-6', new StudentController());
         this.container.setAttribute('name', 'Student');
         
         this.initData();

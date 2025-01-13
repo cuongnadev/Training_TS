@@ -9,7 +9,7 @@ interface ApiEndpoints {
     patchStudent: EndpointMethod<{ id: string }>;
     deleteStudent: EndpointMethod<{ id: string }>;
 
-    getTeachers: EndpointMethod<void>;
+    getTeachers: EndpointMethod<{ page?: number, itemsPerPage?: number, search?: string } | undefined>;
     getTeacher: EndpointMethod<{ id: string }>;
     postTeacher: EndpointMethod<void>;
     patchTeacher: EndpointMethod<{ id: string }>;
@@ -34,7 +34,18 @@ const endpoints: ApiEndpoints = {
     patchStudent: ({ id }) => `/api/students/${id}`,
     deleteStudent: ({ id }) => `/api/students/${id}`,
 
-    getTeachers: () => "/api/teachers",
+    getTeachers: (params) => {
+        console.log(params);
+        
+        if (params?.search) {
+            return `/api/teachers?q=${params.search}`;
+        } else if (params?.page != null && params?.itemsPerPage != null) {
+            return `/api/teachers?_start=${params.page}&_limit=${params.itemsPerPage}`;
+        } else if (params?.search) {
+            return `/api/teachers?search=${params.search}`;
+        }
+        return "/api/teachers";
+    },
     getTeacher: ({ id }) => `/api/teachers/${id}`,
     postTeacher: () => "/api/teachers",
     patchTeacher: ({ id }) => `/api/teachers/${id}`,
