@@ -1,0 +1,194 @@
+.students {
+    &_container {
+        padding-bottom: 26px;
+    }
+
+    &_list {
+        background-color: $White;
+        border-radius: 16px;
+    }
+
+    &_table {
+        width: 100%;
+        border-spacing: 0;
+        overflow-x: hidden;
+    }
+
+    &_checkbox,
+    &_table tbody tr input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+    }
+
+    &_checkbox,
+    &_table tbody tr input[type="checkbox"] {
+        position: relative;
+        border: 2px solid $Gray-2;
+        background-color: #fff;
+        -webkit-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        transition:
+            background-color 0.5s ease,
+            border-color 0.5s ease;
+    }
+
+    &_checkbox:checked,
+    &_table tbody tr input[type="checkbox"]:checked {
+        background-color: $Purple;
+        border-color: $Purple;
+    }
+
+    &_checkbox:checked::after,
+    &_table tbody tr input[type="checkbox"]:checked::after {
+        content: "\2714";
+        color: #fff;
+        font-size: $text-xs;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        line-height: 1;
+    }
+
+    &_table tbody tr {
+        position: relative;
+    }
+
+    &_table tbody tr::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transition: all 0.24s ease;
+    }
+
+    &_table tbody tr.checked::after {
+        width: 4px;
+        background-color: $Purple;
+    }
+
+    &_table tbody tr td::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: $Gray-2;
+    }
+
+    &_table th,
+    &_table td {
+        padding: 16px;
+        text-align: left;
+    }
+
+    &_table th {
+        @include font($text-md, $font-semibold);
+    }
+
+    &_table tbody tr {
+        &:hover {
+            background-color: $Purple-10;
+        }
+    }
+
+    &_table .student_name {
+        max-width: 240px;
+        color: $Text;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        @include font-heading($text-md);
+        cursor: pointer;
+    }
+
+    &_table .student_avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 36px;
+        object-fit: cover;
+    }
+
+    &_table .student_id {
+        color: $Purple;
+        @include font($text-md, $font-semibold);
+    }
+
+    &_table .student_dob,
+    &_table .student_parent-name,
+    &_table .student_city {
+        @include font($text-sm, $font-regular);
+    }
+
+    &_table .student_dob {
+        color: $Gray-3;
+    }
+
+    &_table .student_phone {
+        color: $Text;
+    }
+
+    &_table .student_city {
+        color: $Text;
+    }
+
+    &_table .student_contact-btn {
+        height: 36px;
+        padding: 6px 16px;
+
+        & svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        & svg path {
+            fill: $Purple;
+        }
+    }
+
+    &_table .student_grade {
+        & span {
+            width: auto;
+            height: 36px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            @include font($text-xs, $font-semibold);
+            text-transform: uppercase;
+            color: $White;
+            background-color: $Gray;
+            box-shadow: $Shadow;
+        }
+
+        &.grade-a span {
+            background-color: $Orange;
+        }
+
+        &.grade-b span {
+            background-color: $Yellow;
+        }
+
+        &.grade-c span {
+            background-color: $Purple;
+        }
+    }
+
+    &_table .student_action-more {
+        padding: 0;
+        border: none;
+
+        & .btn {
+            background-color: transparent;
+        }
+    }
+
+    &_table .student_action-more .icon {
+        & svg path {
+            fill: $Gray-3;
+        }
+    }
+}

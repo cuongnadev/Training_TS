@@ -7,9 +7,11 @@ enum Payment {
 
 export default interface Student extends User {
     id?: number;
+    avatar: string;
     studentCode: string;
     firstName: string;
     lastName: string;
+    class: string;
     dob: Date;
     pob: string;
     email: string;
