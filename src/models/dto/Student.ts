@@ -1,14 +1,13 @@
 import { User } from "../common";
 
-enum Payment {
+export enum Payment {
     Cash,
     Debit,
 }
 
 export default interface Student extends User {
     id?: number;
-    avatar: string;
-    studentCode: string;
+    avatar: File | undefined;
     firstName: string;
     lastName: string;
     class: string;

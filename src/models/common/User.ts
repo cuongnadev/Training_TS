@@ -1,6 +1,6 @@
 export default interface User {
     id?: number;
-    avatar: string;
+    avatar: File | undefined;
     firstName: string;
     lastName: string;
     email: string;

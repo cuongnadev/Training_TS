@@ -1,5 +1,5 @@
 import search from '~/assets/icons/Search.svg';
-type HttpMethod = "GET" | "PUSH" | "PATCH" | "DELETE";
+type HttpMethod = "GET" | "POST" | "PATCH" | "DELETE";
 type EndpointMethod<T = object> = (arg: T) => string;
 
 interface ApiEndpoints {
