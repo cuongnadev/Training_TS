@@ -38,7 +38,7 @@ export default class StudentService {
      * @param student - Thông tin sinh viên mới
      */
     async postStudent(token: string, student: object): Promise<any> {
-        return await this.apiService.request("PUSH", "postStudent", undefined, undefined, student, {
+        return await this.apiService.request("POST", "postStudent", undefined, undefined, student, {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
         });

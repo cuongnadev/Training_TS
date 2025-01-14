@@ -44,7 +44,11 @@ export class StudentItem {
         this.studentAvatar = CreateElement("img", "student_avatar");
         console.log(this.student);
         
-        this.student.avatar ? (this.studentAvatar.src = this.student.avatar) : (this.studentAvatar.src = placeholder);
+        this.student.avatar 
+        ? typeof this.student.avatar === 'object' 
+        ? (this.studentAvatar.src = URL.createObjectURL(this.student.avatar)) 
+        : (this.studentAvatar.src = this.student.avatar) 
+        : (this.studentAvatar.src = placeholder);
         this.studentAvatar.alt = "";
         // avatar frame
         const studentAvatarFrame = CreateElement("figure", "d-flex items-center justify-center", [this.studentAvatar]);
