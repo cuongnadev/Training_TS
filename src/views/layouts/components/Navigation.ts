@@ -13,13 +13,13 @@ const navigationLinkItems = [
         startIcon: studentIcon,
         label: "Students",
         to: "/students",
-        componentPaths: ["/students", "/students/:studentId"],
+        componentPaths: ["/students", "/students/:studentId", "/students/add"],
     },
     {
         startIcon: teacherIcon,
         label: "teachers",
         to: "/teachers",
-        componentPaths: ["/teachers", "/teachers/:teacherId"],
+        componentPaths: ["/teachers", "/teachers/:teacherId", "/teachers/add"],
     },
 ];
 

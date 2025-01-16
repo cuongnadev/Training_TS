@@ -41,7 +41,7 @@ export default class TeacherService {
      * @param token - Token xác thực
      */
     async postTeacher(teacher: object, token: string): Promise<any> {
-        return await this.apiService.request("PUSH", "postTeacher", undefined, undefined, teacher, {
+        return await this.apiService.request("POST", "postTeacher", undefined, undefined, teacher, {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
         });

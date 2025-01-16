@@ -22,7 +22,11 @@ export class TeacherItem {
     initContent() {
         // avatar
         this.teacherAvatar = CreateElement("img", "teacher-item_avatar");
-        this.teacher.avatar ? (this.teacherAvatar.src = this.teacher.avatar) : (this.teacherAvatar.src = placeholder);
+        this.teacher.avatar 
+        ? typeof this.teacher.avatar === "object" 
+        ? (this.teacherAvatar.src = URL.createObjectURL(this.teacher.avatar)) 
+        : (this.teacherAvatar.src = this.teacher.avatar)
+        : (this.teacherAvatar.src = placeholder);
         this.teacherAvatar.alt = "";
         // avatar frame
         const teacherAvatarFrame = CreateElement("figure", "d-flex items-center justify-center", [this.teacherAvatar]);

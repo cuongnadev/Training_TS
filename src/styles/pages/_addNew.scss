@@ -46,7 +46,7 @@
         color: $Gray-3;
     }
 
-    &_input, &_input.textarea {
+    &_input, &_input.input-textarea {
         @include font($text-sm, $font-regular);
         width: 100%;
         border-radius: 5px;
@@ -58,8 +58,12 @@
         min-width: 216px;
     }
     
-    &_input.textarea::placeholder {
-        color: $Gray-3;
+    &_input.input-textarea {
+        height: 140px;
+
+        &::placeholder {
+            color: $Gray-3;
+        }    
     }
     
     &_input.textarea {
