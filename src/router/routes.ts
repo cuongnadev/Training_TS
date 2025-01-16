@@ -1,6 +1,6 @@
 // routes.ts
 import { Router } from ".";
-import { Dashboard, Students, Teachers, NotFound, CreateStudent} from "../views/pages";
+import { Dashboard, Students, Teachers, NotFound, CreateStudent, CreateTeacher} from "../views/pages";
 import { MainLayout } from "../views/layouts";
 
 const app = document.getElementById("app") as HTMLElement;
@@ -34,6 +34,10 @@ router.addRoute("/students/add", () => {
 
 router.addRoute("/teachers", () => {
     mainLayout.updateMainContent(new Teachers().render());
+});
+
+router.addRoute("/teachers/add", () => {
+    mainLayout.updateMainContent(new CreateTeacher().render());
 });
 
 export default router;

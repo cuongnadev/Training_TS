@@ -2,12 +2,12 @@ import { User } from "../common";
 
 export default interface Teacher extends User {
     id?: number;
+    avatar: File | undefined;
     firstName: string;
     lastName: string;
     email: string;
     phone: number;
     address: string;
-    avatar: string;
     dob: Date;
     pob: string;
     university: string;
