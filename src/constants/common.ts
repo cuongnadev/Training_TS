@@ -2,4 +2,4 @@ export const anchorAttributes = {
     navLink: 'data-router',
     link: 'data-link',
 };
-export const baseUrl = 'http://localhost:3000';
+export const baseUrl = 'https://jsonserver-xp2o.onrender.com';
