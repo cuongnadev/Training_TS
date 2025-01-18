@@ -4,7 +4,6 @@ import router from "../router/routes";
 import { TeacherService } from "../services";
 import { TeacherItem } from "../views/components";
 import { Controller } from "./Controller";
-import ApiService from '../services/api';
 
 export class TeacherController extends Controller {
     teacherService: TeacherService;

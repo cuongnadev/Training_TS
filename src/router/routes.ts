@@ -2,7 +2,6 @@
 import { Router } from ".";
 import { Dashboard, Students, Teachers, NotFound, CreateStudent, CreateTeacher} from "../views/pages";
 import { MainLayout } from "../views/layouts";
-import student from '~/assets/icons/Student.svg';
 
 const app = document.getElementById("app") as HTMLElement;
 
