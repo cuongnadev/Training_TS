@@ -5,3 +5,4 @@ export * from './input';
 export * from './search';
 export * from './toolbar';
 export * from './form';
+export * from './dropdown';

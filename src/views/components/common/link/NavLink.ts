@@ -1,6 +1,6 @@
-import { anchorAttributes } from "../../../../constants";
-import { parsePath } from "../../../../router";
-import { CreateElement } from "../../core";
+import { anchorAttributes } from "~/constants";
+import { parsePath } from "~/router";
+import { CreateElement } from "~/views/components";
 
 export class NavLink {
     link: HTMLAnchorElement;

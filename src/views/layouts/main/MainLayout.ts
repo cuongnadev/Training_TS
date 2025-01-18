@@ -1,4 +1,4 @@
-import { CreateElement } from "../../components/core";
+import { CreateElement } from "~/views/components";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 

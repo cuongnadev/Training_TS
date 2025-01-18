@@ -1,6 +1,5 @@
-import { dropdownIcon } from "../../../../constants";
-import { Component, CreateElement } from "../../core";
-import { Button } from "../button";
+import { dropdownIcon } from "~/constants";
+import { Component, CreateElement, Button } from "~/views/components";
 
 export class Pagination extends Component {
     startPage: number = 1;
@@ -104,7 +103,7 @@ export class Pagination extends Component {
 
     setTitle(startItem: number, totalItems: number): void {
         const endItem = startItem + this.itemsPerPage - 1;
-        this.title.innerHTML = `Showing <span>${startItem}-${endItem < totalItems ? endItem : totalItems}</span> from <span>${totalItems}</span> data`;
+        this.title.innerHTML = `Showing <span>${startItem + 1}-${endItem + 1 < totalItems ? endItem + 1 : totalItems}</span> from <span>${totalItems}</span> data`;
     }
 
     handlePageChange(newPage: number): void {

@@ -20,3 +20,19 @@ button {
     font-family: inherit;
     cursor: pointer;
 }
+
+// Scrollbar CSS
+html {
+    &::-webkit-scrollbar {
+        border-radius: 0;
+        width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 2px;
+        background-color: $Purple;
+    }
+    &::-webkit-scrollbar-track {
+        border-radius: 0;
+        background-color: $Purple-10;
+    }
+}

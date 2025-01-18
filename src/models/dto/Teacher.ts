@@ -1,7 +1,7 @@
 import { User } from "../common";
 
 export default interface Teacher extends User {
-    id?: number;
+    id?: string;
     avatar: File | undefined;
     firstName: string;
     lastName: string;

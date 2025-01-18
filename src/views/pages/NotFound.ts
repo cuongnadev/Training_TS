@@ -1,5 +1,5 @@
-import { NotFoundController } from "../../controllers";
-import { CreateElement, PageLayout } from "../components/core";
+import { NotFoundController } from "~/controllers";
+import { CreateElement, PageLayout } from "~/views/components";
 
 export default class NotFound extends PageLayout<NotFoundController> {
     constructor() {

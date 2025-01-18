@@ -1,4 +1,4 @@
-import { Component, CreateElement } from "../../components/core";
+import { Component, CreateElement } from "~/views/components";
 import { HeaderActions } from "./HeaderAction";
 
 export default class Header extends Component {

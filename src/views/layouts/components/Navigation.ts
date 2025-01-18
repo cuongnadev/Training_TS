@@ -1,6 +1,5 @@
-import { homeIcon, logo, studentIcon, teacherIcon } from "../../../constants";
-import { NavLink } from "../../components/common/link";
-import { Component, CreateElement } from "../../components/core";
+import { homeIcon, logo, studentIcon, teacherIcon } from "~/constants";
+import { NavLink, Component, CreateElement } from "~/views/components";
 
 const navigationLinkItems = [
     {
@@ -13,13 +12,13 @@ const navigationLinkItems = [
         startIcon: studentIcon,
         label: "Students",
         to: "/students",
-        componentPaths: ["/students", "/students/:studentId", "/students/add"],
+        componentPaths: ["/students", "/students/modify", "/students/add"],
     },
     {
         startIcon: teacherIcon,
         label: "teachers",
         to: "/teachers",
-        componentPaths: ["/teachers", "/teachers/:teacherId", "/teachers/add"],
+        componentPaths: ["/teachers", "/teachers/modify", "/teachers/add"],
     },
 ];
 

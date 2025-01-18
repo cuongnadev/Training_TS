@@ -1,6 +1,5 @@
-import { bellIcon, gearIcon, placeholder } from "../../../constants";
-import { Component, CreateElement } from "../../components";
-import { Button } from "../../components";
+import { bellIcon, gearIcon, placeholder } from "~/constants";
+import { Component, CreateElement, Button } from "~/views/components";
 
 export class HeaderActions extends Component {
     bellBtn!: Button;

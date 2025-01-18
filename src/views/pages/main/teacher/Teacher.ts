@@ -1,14 +1,13 @@
-import { TeacherController } from "../../../../controllers";
-import { TypePageValues } from "../../../../types";
-import { Pagination, TeacherItem, Toolbar } from "../../../components";
-import { CreateElement, PageLayout } from "../../../components/core";
+import { TeacherController } from "~/controllers";
+import { TypePageValues } from "~/types";
+import { CreateElement, PageLayout, Pagination, Toolbar } from "~/views/components";
 
 class Teachers extends PageLayout<TeacherController> {
     startItem: number = 0;
-    studentPerPage: number = 15;
+    teacherPerPage: number = 15;
     teachersList: HTMLDivElement;
     toolbar: Toolbar;
-    pagination: any;
+    pagination!: Pagination;
 
     constructor() {
         super("teachers_container d-flex flex-col gap-6", new TeacherController());
@@ -28,7 +27,7 @@ class Teachers extends PageLayout<TeacherController> {
         // Lắng nghe sự kiện 'search'
         this.toolbar.eventEmitter.on("search", (value: string) => this.updateListTeachers(undefined, value));
 
-        this.controller?.handleTeacherLists(this.teachersList, this.startItem, this.studentPerPage);
+        this.controller?.handleTeacherLists(this.teachersList, this.startItem, this.teacherPerPage);
 
         this.initPagination();
         this.container.append(this.toolbar.render(), this.teachersList);
@@ -36,7 +35,7 @@ class Teachers extends PageLayout<TeacherController> {
 
     private initPagination(): void {
         this.handleTotalTeachers().then((totalTeachers) => {
-            this.pagination = new Pagination(this.startItem, this.studentPerPage, totalTeachers);
+            this.pagination = new Pagination(this.startItem, this.teacherPerPage, totalTeachers);
             this.pagination.handlePageChange = (currentItem: number) => this.updateListTeachers(currentItem);
     
             // Thêm Pagination vào `studentLists` sau khi có dữ liệu
@@ -52,15 +51,15 @@ class Teachers extends PageLayout<TeacherController> {
     updateListTeachers(currentItem?: number, value?: string) {
         this.teachersList.innerHTML = "";
         if(currentItem !== undefined) {
-            this.controller?.handleTeacherLists(this.teachersList, currentItem, this.studentPerPage);
+            this.controller?.handleTeacherLists(this.teachersList, currentItem, this.teacherPerPage);
         } else if (value?.trim()) {
-            this.controller?.handleTeacherLists(this.teachersList, currentItem!, this.studentPerPage, value);
+            this.controller?.handleTeacherLists(this.teachersList, currentItem!, this.teacherPerPage, value);
             const pagination = document.querySelector('.pagination_container');
             if(pagination) {
                 this.container.removeChild(this.pagination.render());
             }
         } else {
-            this.controller?.handleTeacherLists(this.teachersList, 0, 8)
+            this.controller?.handleTeacherLists(this.teachersList, 0, 15)
             this.container.appendChild(this.pagination.render());
         }
     }

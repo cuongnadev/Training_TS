@@ -1,4 +1,4 @@
-import { CreateElement } from "../../core";
+import { CreateElement } from "~/views/components";
 
 export class InputLabel {
     inputLabel: HTMLLabelElement;

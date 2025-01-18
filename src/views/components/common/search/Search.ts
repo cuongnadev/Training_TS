@@ -1,8 +1,5 @@
-import { searchIcon } from "../../../../constants";
-import { EventEmitter } from "../../../../constants/EventEmitter";
-import { Component } from "../../core";
-import { Button } from "../button";
-import { Input } from "../input";
+import { searchIcon, EventEmitter } from "~/constants";
+import { Component, Button, Input } from "~/views/components";
 
 export class Search extends Component {
     searchInput!: Input;

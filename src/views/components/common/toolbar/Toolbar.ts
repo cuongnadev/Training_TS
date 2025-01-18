@@ -1,9 +1,7 @@
-import router from "../../../../router/routes";
-import { dropdownIcon, EventEmitter, plusIcon } from "../../../../constants";
-import { TypePage, TypePageValues } from "../../../../types";
-import { Component, CreateElement } from "../../core";
-import { Button } from "../button";
-import { Search } from "../search";
+import router from "~/router/routes";
+import { dropdownIcon, EventEmitter, plusIcon } from "~/constants";
+import { TypePage, TypePageValues } from "~/types";
+import { Component, CreateElement, Button, Search } from "~/views/components";
 
 export class Toolbar extends Component {
     eventEmitter: EventEmitter;

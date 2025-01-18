@@ -1,4 +1,4 @@
-import { CreateElement } from "../../core";
+import { CreateElement } from "~/views/components";
 
 export class Input {
     private input: HTMLInputElement;

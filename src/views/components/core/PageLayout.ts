@@ -1,4 +1,4 @@
-import { Controller } from "../../../controllers";
+import { Controller } from "~/controllers";
 import { Component } from "./Component";
 
 export abstract class PageLayout<T extends Controller> extends Component {
