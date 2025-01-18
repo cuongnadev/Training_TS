@@ -1,3 +1,3 @@
-import { OverviewItem } from "./OverViewItem";
+import { OverviewItem } from "./OverviewItem";
 
 export { OverviewItem };
