@@ -1,5 +1,4 @@
-import { Component } from "../../core";
-import { Input } from "./Input";
+import { Component, Input } from "~/views/components";
 
 export class InputPhoto extends Component {
     private fileInput!: Input;

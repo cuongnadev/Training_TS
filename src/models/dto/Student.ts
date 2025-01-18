@@ -6,7 +6,7 @@ export enum Payment {
 }
 
 export default interface Student extends User {
-    id?: number;
+    id?: string;
     avatar: File | undefined;
     firstName: string;
     lastName: string;

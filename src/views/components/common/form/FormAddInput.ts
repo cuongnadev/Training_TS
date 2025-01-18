@@ -1,4 +1,4 @@
-import { CreateElement } from "../../../components";
+import { CreateElement } from "~/views/components";
 import { FormAddInputCol } from "./FormAddInputCol";
 
 export class FormAddInput {

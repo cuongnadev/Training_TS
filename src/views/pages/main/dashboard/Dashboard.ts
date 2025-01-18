@@ -1,6 +1,6 @@
-import { schoolCalendar, schoolFinance, schoolPerformance } from "../../../../constants";
-import { DashboardController } from "../../../../controllers";
-import { CreateElement, PageLayout } from "../../../components/core";
+import { schoolCalendar, schoolFinance, schoolPerformance } from "~/constants";
+import { DashboardController } from "~/controllers";
+import { CreateElement, PageLayout } from "~/views/components";
 
 class Dashboard extends PageLayout<DashboardController> {
     overviews!: HTMLDivElement;

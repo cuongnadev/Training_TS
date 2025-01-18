@@ -4,6 +4,7 @@ import router from "../router/routes";
 import { TeacherService } from "../services";
 import { TeacherItem } from "../views/components";
 import { Controller } from "./Controller";
+import ApiService from '../services/api';
 
 export class TeacherController extends Controller {
     teacherService: TeacherService;
@@ -38,6 +39,19 @@ export class TeacherController extends Controller {
             );
         });
     }
+
+    async getTeacher(id: string) {
+        try {
+            const teacherData = await this.teacherService.getTeacher(id, 'my-secret-token');
+            
+            if (!teacherData) {
+                throw new Error("Not found teacher");
+            }
+            return teacherData;
+        } catch (error) {
+            console.log("Error when fetch teacher:", error);
+        }
+    }
     
     handleCreateTeacher (teacher: Teacher) {
         // validation
@@ -50,6 +64,29 @@ export class TeacherController extends Controller {
             }, 1500);
         }).catch((error) => {
             console.log("Error when create Teacher: " + error);
+        })
+    }
+
+    handleModifyTeacher(id: string, updateData: Object) {
+        this.teacherService.patchTeacher(id, updateData, 'my-secret-token').then((response) => {
+            console.log("Update Teacher Successfull!: " + response);
+
+            setTimeout(() => {
+                router.navigate(`/teachers`);
+            }, 1500);
+        }).catch((error) => {
+            console.log("Error when modify Teacher: " + error);
+        })
+    }
+
+    handleDeleteTeacher(id: string, item: HTMLDivElement) {
+        // delete a teacher
+        this.teacherService.deleteTeacher(id, 'my-secret-token').then((response) => {
+            console.log("Delete Teacher Successfull!: " + response);
+            
+            item.remove();
+        }).catch((error) => {
+            console.log("Error when delete Teacher: " + error);
         })
     }
 }

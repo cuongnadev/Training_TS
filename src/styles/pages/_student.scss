@@ -84,7 +84,7 @@
     &_table th,
     &_table td {
         padding: 16px;
-        text-align: left;
+        text-align: left;    
     }
 
     &_table th {
@@ -100,7 +100,7 @@
     &_table .student_name {
         max-width: 240px;
         color: $Text;
-        overflow-x: hidden;
+        overflow: auto;
         text-overflow: ellipsis;
         white-space: nowrap;
         @include font-heading($text-md);
@@ -122,7 +122,11 @@
     &_table .student_dob,
     &_table .student_parent-name,
     &_table .student_city {
+        max-width: 140px;
         @include font($text-sm, $font-regular);
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
     }
 
     &_table .student_dob {
@@ -162,6 +166,7 @@
             color: $White;
             background-color: $Gray;
             box-shadow: $Shadow;
+            white-space: nowrap;
         }
 
         &.grade-a span {

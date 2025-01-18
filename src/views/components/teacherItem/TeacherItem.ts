@@ -1,7 +1,8 @@
-import { callIcon, dotsIcon, emailIcon, placeholder } from "../../../constants";
-import { Teacher } from "../../../models/dto";
-import { Button } from "../common";
-import { CreateElement } from "../core";
+import { callIcon, dotsIcon, emailIcon, placeholder } from "~/constants";
+import { TeacherController } from "~/controllers";
+import { Teacher } from "~/models/dto";
+import router from "~/router/routes";
+import { Button, Dropdown, CreateElement } from "~/views/components";
 
 export class TeacherItem {
     teacherItem: HTMLDivElement;
@@ -12,7 +13,10 @@ export class TeacherItem {
     callIcon!: Button;
     emailIcon!: Button;
     actions!: HTMLButtonElement;
+    controller: TeacherController;
+
     constructor(teacher: Teacher) {
+        this.controller = new TeacherController();
         this.teacherItem = CreateElement("div", "teacher-item_box d-flex flex-col items-center gap-4");
         this.teacher = teacher;
 
@@ -22,11 +26,11 @@ export class TeacherItem {
     initContent() {
         // avatar
         this.teacherAvatar = CreateElement("img", "teacher-item_avatar");
-        this.teacher.avatar 
-        ? typeof this.teacher.avatar === "object" 
-        ? (this.teacherAvatar.src = URL.createObjectURL(this.teacher.avatar)) 
-        : (this.teacherAvatar.src = this.teacher.avatar)
-        : (this.teacherAvatar.src = placeholder);
+        this.teacher.avatar
+            ? typeof this.teacher.avatar === "object"
+                ? (this.teacherAvatar.src = URL.createObjectURL(this.teacher.avatar))
+                : (this.teacherAvatar.src = this.teacher.avatar)
+            : (this.teacherAvatar.src = placeholder);
         this.teacherAvatar.alt = "";
         // avatar frame
         const teacherAvatarFrame = CreateElement("figure", "d-flex items-center justify-center", [this.teacherAvatar]);
@@ -77,12 +81,28 @@ export class TeacherItem {
             null,
             dotsIcon,
             null,
-            'rounded',
-            'md',
+            "rounded",
+            "md",
             "teacher-item_more-btn",
-            'active',
+            "active",
             () => {},
         ).render();
+
+        const dropdownLink = [
+            {
+                href: `/teachers/modify?id=${this.teacher.id}`,
+                label: "Modify",
+                action: () => router.navigate(`/teachers/modify?id=${this.teacher.id}`)
+            },
+            {
+                href: "/teachers/delete",
+                label: "Delete",
+                action: () => this.controller.handleDeleteTeacher((this.teacher.id as string), this.teacherItem)
+            }
+        ];
+
+        const dropdown = new Dropdown();
+        dropdown.init(this.actions, dropdownLink);
 
         this.teacherItem.append(teacherAvatarFrame, teacherInfo, teacherContact, this.actions);
     }

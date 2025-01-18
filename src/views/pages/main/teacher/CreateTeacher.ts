@@ -1,7 +1,6 @@
-import { TeacherController } from "../../../../controllers";
-import { Teacher } from "../../../../models/dto";
-import { Button, Form, Input, InputLabel, InputPhoto, TextArea } from "../../../components";
-import { CreateElement, PageLayout } from "../../../components/core";
+import { TeacherController } from "~/controllers";
+import { Teacher } from "~/models/dto";
+import { CreateElement, PageLayout, Button, Form, Input, InputLabel, InputPhoto, TextArea } from "~/views/components";
 
 class CreateTeacher extends PageLayout<TeacherController> {
     formContainer: Form;
@@ -22,10 +21,13 @@ class CreateTeacher extends PageLayout<TeacherController> {
     submit!: Button;
     saveAsDraft!: Button;
     cityInput!: Input;
+    teacher!: Teacher;
+    id: string | undefined;
+    update!: Button;
 
-    constructor(data?: Teacher) {
+    constructor(id?: string) {
         super("create-teacher_container", new TeacherController());
-
+        this.id = id;
         this.container.setAttribute("name", "Add New Teacher");
         this.formContainer = new Form("add_teacher-form-container  d-flex flex-col items-start flex-1 gap-8");
         this.formContainer.onSubmit(() => {
@@ -35,7 +37,11 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.initData();
     }
 
-    initData(): void {
+    async initData(): Promise<void> {
+        if(this.id) {
+            this.teacher = await this.controller?.getTeacher(this.id);
+        }
+        
         super.initData();
         this.controller?.fetchData(this.initContent.bind(this));
     }
@@ -70,6 +76,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.firstNameInput = new Input(
             {
                 placeholder: "First Name",
+                value: `${this.teacher ? this.teacher.firstName : ""}`,
                 required: true,
             },
             "add_input",
@@ -85,6 +92,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.lastNameInput = new Input(
             {
                 placeholder: "Last Name",
+                value: `${this.teacher ? this.teacher.lastName : ""}`,
                 required: true,
             },
             "add_input",
@@ -106,6 +114,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.email = new Input(
             {
                 placeholder: "Email",
+                value: `${this.teacher ? this.teacher.email : ""}`,
                 required: true,
             },
             "add_input",
@@ -118,6 +127,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.phone = new Input(
             {
                 placeholder: "Phone",
+                value: `${this.teacher ? this.teacher.phone : ""}`,
                 required: true,
             },
             "add_input",
@@ -136,6 +146,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.addressInput = new TextArea(
             {
                 placeholder: "Address",
+                value: `${this.teacher ? this.teacher.address : ""}`,
                 rows: 8,
                 cols: 40,
                 required: true,
@@ -166,6 +177,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.dateInput = new Input(
             {
                 placeholder: "24 Februari 1997",
+                value: `${this.teacher ? this.teacher.dob : ""}`,
                 required: true,
             },
             "add_input",
@@ -178,6 +190,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.placeInput = new Input(
             {
                 placeholder: "Viet Nam",
+                value: `${this.teacher ? this.teacher.pob : ""}`,
                 required: true,
             },
             "add_input",
@@ -223,6 +236,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.universityInput = new Input(
             {
                 placeholder: "VKU",
+                value: `${this.teacher ? this.teacher.university : ""}`,
                 required: true,
             },
             "add_input",
@@ -238,6 +252,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.degreeInput = new Input(
             {
                 placeholder: "Computer Network",
+                value: `${this.teacher ? this.teacher.degree : ""}`,
                 required: true,
             },
             "add_input",
@@ -258,6 +273,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.startDateInput = new Input(
             {
                 placeholder: "01 January 1999",
+                value: `${this.teacher ? this.teacher.startDate : ""}`,
                 required: true,
             },
             "add_input",
@@ -268,6 +284,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.endDateInput = new Input(
             {
                 placeholder: "01 January 1999",
+                value: `${this.teacher ? this.teacher.endDate : ""}`,
                 required: true,
             },
             "add_input",
@@ -287,6 +304,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
         this.cityInput = new Input(
             {
                 placeholder: "City",
+                value: `${this.teacher ? this.teacher.city : ""}`,
                 required: true,
             },
             "add_input",
@@ -332,12 +350,20 @@ class CreateTeacher extends PageLayout<TeacherController> {
             "disabled",
             () => {},
         );
-        // Submit
-        this.submit = new Button("Submit", null, null, "filled", "sm", "add_submit", "active", () => {});
+
         const actions = CreateElement("div", "add_form-actions d-flex items-center justify-end gap-4", [
             this.saveAsDraft.render(),
-            this.submit.render(),
         ]);
+
+        if(this.id) {
+            // modify 
+            this.update = new Button("Update", null, null, "filled", "sm", "add_submit update", "active", () => {});
+            actions.appendChild(this.update.render());
+        } else {
+            // Submit
+            this.submit = new Button("Submit", null, null, "filled", "sm", "add_submit", "active", () => {});
+            actions.appendChild(this.submit.render());
+        }
 
         this.formContainer.form.append(formPersonalDetails, formUniversity, actions);
 
@@ -345,8 +371,7 @@ class CreateTeacher extends PageLayout<TeacherController> {
     }
 
     handleSubmitForm() {
-        console.log(this.imageSelect);
-
+        // data 
         const teacher: Teacher = {
             avatar: this.imageSelect || undefined,
             firstName: this.firstNameInput.render().value,
@@ -362,12 +387,17 @@ class CreateTeacher extends PageLayout<TeacherController> {
             endDate: new Date(this.endDateInput.render().value),
             city: this.cityInput.render().value,
         };
-        this.controller?.handleCreateTeacher(teacher);
+        
+        if(this.id) {
+            // update
+            this.controller?.handleModifyTeacher(this.id, teacher);
+        } else {
+            // create
+            this.controller?.handleCreateTeacher(teacher);
+        }
     }
 
     handleSelectImage(file: File) {
-        console.log(file);
-
         if (file) {
             this.imageSelect = file;
         }

@@ -1,8 +1,6 @@
-import { StudentController } from "../../../../controllers";
-import { Pagination } from "../../../components";
-import { Toolbar } from "../../../components/common";
-import { CreateElement, PageLayout } from "../../../components/core";
-import { TypePageValues } from "../../../../types";
+import { StudentController } from "~/controllers";
+import { Pagination, Toolbar, CreateElement, PageLayout } from "~/views/components";
+import { TypePageValues } from "~/types";
 
 const TitlesList = [
     "Name",

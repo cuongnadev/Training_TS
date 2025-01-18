@@ -2,6 +2,7 @@
 import { Router } from ".";
 import { Dashboard, Students, Teachers, NotFound, CreateStudent, CreateTeacher} from "../views/pages";
 import { MainLayout } from "../views/layouts";
+import student from '~/assets/icons/Student.svg';
 
 const app = document.getElementById("app") as HTMLElement;
 
@@ -32,12 +33,24 @@ router.addRoute("/students/add", () => {
     mainLayout.updateMainContent(new CreateStudent().render());
 });
 
+router.addRoute(`/students/modify`, () => {
+    const params = new URLSearchParams(window.location.search);
+    const studentId = params.get("id");
+    mainLayout.updateMainContent(new CreateStudent(studentId as string).render());
+});
+
 router.addRoute("/teachers", () => {
     mainLayout.updateMainContent(new Teachers().render());
 });
 
 router.addRoute("/teachers/add", () => {
     mainLayout.updateMainContent(new CreateTeacher().render());
+});
+
+router.addRoute(`/teachers/modify`, () => {
+    const params = new URLSearchParams(window.location.search);
+    const teacherId = params.get("id");
+    mainLayout.updateMainContent(new CreateTeacher(teacherId as string).render());
 });
 
 export default router;

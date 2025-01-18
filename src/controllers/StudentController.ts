@@ -38,6 +38,20 @@ export class StudentController extends Controller {
         });
     }
 
+    async getStudent(id: string) {
+        try {
+            const student = await this.studentService.getStudent('my-secret-token', id);
+
+            if(!student) {
+                throw new Error("Not found student!");
+            }
+
+            return student;
+        } catch (error) {
+            console.log("Error when fetch student:", error);
+        }
+    }
+
     handleCreateStudent(student: Student) {
         console.log(student.avatar);
         
@@ -49,6 +63,31 @@ export class StudentController extends Controller {
             }, 1500);
         }).catch((error) => {
             console.log("Error when create student:", error);
+        });
+    }
+
+    handleUpdateStudent(id: string, updatedData: Student) {
+        this.studentService.patchStudent('my-secret-token', id, updatedData).then(() => {
+            console.log("Update student successfull!:", updatedData);
+            
+            setTimeout(() => {
+                router.navigate('/students');
+            }, 1500);
+        }).catch((error) => {
+            console.log("Error when update student", error);
+        })
+    }
+
+    handleDeleteStudent(id: string, row: HTMLTableRowElement) {
+        console.log(id);
+        
+        // delete a student
+        this.studentService.deleteStudent('my-secret-token', id).then((response) => {
+            console.log("Delete student successfull!:", response);
+            
+            row.remove();
+        }).catch((error) => {
+            console.log("Error when delete student:", error);
         });
     }
 }

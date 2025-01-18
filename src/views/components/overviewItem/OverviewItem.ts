@@ -1,4 +1,4 @@
-import { Component, CreateElement } from "../core";
+import { Component, CreateElement } from "~/views/components";
 
 export class OverviewItem extends Component {
     private icon!: HTMLSpanElement;

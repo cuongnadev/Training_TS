@@ -1,4 +1,3 @@
-import search from '~/assets/icons/Search.svg';
 type HttpMethod = "GET" | "POST" | "PATCH" | "DELETE";
 type EndpointMethod<T = object> = (arg: T) => string;
 
@@ -18,38 +17,34 @@ interface ApiEndpoints {
 
 const endpoints: ApiEndpoints = {
     getStudents: (params) => {
-        console.log(params);
-        
         if (params?.search) {
-            return `/api/students?q=${params.search}`;
+            return `/students?q=${params.search}`;
         } else if (params?.page != null && params?.itemsPerPage != null) {
-            return `/api/students?_start=${params.page}&_limit=${params.itemsPerPage}`;
+            return `/students?_start=${params.page}&_limit=${params.itemsPerPage}`;
         } else if (params?.search) {
-            return `/api/students?search=${params.search}`;
+            return `/students?search=${params.search}`;
         }
-        return "/api/students";
+        return "/students";
     },
-    getStudent: ({ id }) => `/api/students/${id}`,
-    postStudent: () => "/api/students",
-    patchStudent: ({ id }) => `/api/students/${id}`,
-    deleteStudent: ({ id }) => `/api/students/${id}`,
+    getStudent: ({ id }) => `/students/${id}`,
+    postStudent: () => "/students",
+    patchStudent: ({ id }) => `/students/${id}`,
+    deleteStudent: ({ id }) => `/students/${id}`,
 
     getTeachers: (params) => {
-        console.log(params);
-        
         if (params?.search) {
-            return `/api/teachers?q=${params.search}`;
+            return `/teachers?q=${params.search}`;
         } else if (params?.page != null && params?.itemsPerPage != null) {
-            return `/api/teachers?_start=${params.page}&_limit=${params.itemsPerPage}`;
+            return `/teachers?_start=${params.page}&_limit=${params.itemsPerPage}`;
         } else if (params?.search) {
-            return `/api/teachers?search=${params.search}`;
+            return `/teachers?search=${params.search}`;
         }
-        return "/api/teachers";
+        return "/teachers";
     },
-    getTeacher: ({ id }) => `/api/teachers/${id}`,
-    postTeacher: () => "/api/teachers",
-    patchTeacher: ({ id }) => `/api/teachers/${id}`,
-    deleteTeacher: ({ id }) => `/api/teachers/${id}`,
+    getTeacher: ({ id }) => `/teachers/${id}`,
+    postTeacher: () => "/teachers",
+    patchTeacher: ({ id }) => `/teachers/${id}`,
+    deleteTeacher: ({ id }) => `/teachers/${id}`,
 };
 
 class ApiService {

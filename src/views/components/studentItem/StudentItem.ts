@@ -1,8 +1,9 @@
-import { callIcon, dotsIcon, emailIcon, placeholder } from "../../../constants";
-import { Student } from "../../../models/dto";
-import { Button } from "../common";
-import { CreateElement } from "../core";
-const columns = [];
+import { callIcon, dotsIcon, emailIcon, placeholder } from "~/constants";
+import { StudentController } from "~/controllers";
+import { Student } from "~/models/dto";
+import router from "~/router/routes";
+import { Button, Dropdown, CreateElement } from "~/views/components";
+
 export class StudentItem {
     student: Student;
     studentRow!: HTMLTableRowElement;
@@ -18,8 +19,10 @@ export class StudentItem {
     mail!: Button;
     studentGrade!: HTMLDivElement;
     actions!: HTMLTableCellElement;
+    controller: StudentController;
 
     constructor(student: Student) {
+        this.controller = new StudentController();
         this.studentRow = CreateElement("tr", "student-item_container");
         this.student = student;
 
@@ -42,7 +45,6 @@ export class StudentItem {
         // student_user
         // avatar
         this.studentAvatar = CreateElement("img", "student_avatar");
-        console.log(this.student);
         
         this.student.avatar 
         ? typeof this.student.avatar === 'object' 
@@ -101,6 +103,23 @@ export class StudentItem {
 
         // Actions
         const actionBtn = new Button(null, dotsIcon, null, "icon", "md", "", "active", () => {});
+
+        // Dropdown for actions
+        const dropdownLinks = [
+            {
+                href: "/students/modify",
+                label: "Modify",
+                action: () => router.navigate(`/students/modify?id=${this.student.id}`),
+            },
+            {
+                href: "/students/delete",
+                label: "Delete",
+                action: () => this.controller.handleDeleteStudent((this.student.id as string), this.studentRow),
+            },
+        ];
+
+        const dropdown = new Dropdown();
+        dropdown.init(actionBtn.render(), dropdownLinks);
         this.actions = CreateElement("td", "student_action-more d-flex items-center", [actionBtn.render()]);
 
         this.studentRow.append(
