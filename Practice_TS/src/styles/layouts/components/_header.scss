@@ -1,0 +1,37 @@
+.header {
+    &_container {
+        padding: 26px 0;
+    }
+
+    &_title {
+        @include font-heading($text-2xl);
+        color: $Text;
+    }
+
+    &_actions-name {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        @include font($text-xs, $font-semibold);
+        color: $Text;
+    }
+
+    &_actions-role {
+        @include font($text-xs, $font-regular);
+        color: $Gray-3;
+    }
+
+    &_actions-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+        box-shadow: $Shadow;
+        cursor: pointer;
+    }
+}
+
+.bell-btn.rounded, .setting-btn.rounded {
+    border: none;
+    background-color: $White;
+    box-shadow: $Shadow;
+}

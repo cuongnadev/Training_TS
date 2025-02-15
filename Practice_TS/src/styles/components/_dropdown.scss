@@ -1,0 +1,38 @@
+// Định dạng cho dropdown
+.dropdown {
+    &_container {
+        padding: 8px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 100;
+        display: block;
+        background-color: $White;
+        border-radius: 8px;
+        box-shadow: $Shadow;
+    }
+
+    &_container.hidden {
+        display: none;
+    }
+
+    &_content {
+        width: auto;
+    }
+
+    &_link {
+        display: block;
+        padding: 4px 12px;
+        text-decoration: none;
+        @include font($text-sm, $font-semibold);
+        color: $Text;
+
+        &:hover {
+            background-color: $Purple-10;
+        }
+    }
+
+    &_trigger {
+        position: relative;
+    }
+}

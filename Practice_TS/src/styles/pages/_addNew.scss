@@ -1,0 +1,92 @@
+// add-teacher
+.add {
+    &_teacher-form-container, &_student-form-container {
+        padding-bottom: 32px;
+    }
+
+    &_form, &_form-actions {
+        width: 100%;
+    }
+
+    &_title {
+        width: 100%;
+        padding: 10px 20px;
+        color: $White;
+        @include font-heading($text-base);
+        border-radius: 20px 20px 0 0;
+        background-color: $Purple;
+    }
+
+    &_label {
+        @include font($text-sm, $font-semibold);
+    }
+
+    &_form-inputs {
+        width: 100%;
+        padding: 24px 32px 32px 32px;
+        border-radius: 0 0 20px 20px;
+        background-color: $White;
+    }
+
+    &_form-input-col + &_form-input-col {
+        flex: 1;
+    }
+
+    &_form-input-row {
+        width: 100%;
+    }
+
+    &_form-input-item {
+        width: 100%;
+        max-width: 440px;
+    }
+
+    &_form-radio span {
+        @include font($text-sm, $font-regular);
+        color: $Gray-3;
+    }
+
+    &_input, &_input.input-textarea {
+        @include font($text-sm, $font-regular);
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid $Gray-2;
+        color: $Gray-3;
+    }
+
+    &_input.small {
+        min-width: 216px;
+    }
+    
+    &_input.input-textarea {
+        height: 140px;
+
+        &::placeholder {
+            color: $Gray-3;
+        }    
+    }
+    
+    &_input.textarea {
+        min-height: 140px;
+        padding: 15px;
+        resize: none;
+        outline: none;
+    }
+    
+    &_input.textarea:focus {
+        border: 1px solid $Purple;
+    }
+    
+    &_input.textarea::-webkit-scrollbar {
+        border-radius: 0;
+        width: 4px;
+    }
+    &_input.textarea::-webkit-scrollbar-thumb {
+        border-radius: 2px;
+        background-color: $Purple;
+    }
+    &_input.textarea::-webkit-scrollbar-track {
+        border-radius: 0;
+        background-color: $Purple-10;
+    }
+}

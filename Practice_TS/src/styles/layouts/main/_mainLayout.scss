@@ -1,0 +1,12 @@
+.main-layout {
+    &_content {
+        padding: 0 26px;
+        background-color: $Background;
+        overflow-y: auto;
+    }
+    
+    // Scrollbar CSS
+    &_content::-webkit-scrollbar {
+        display: none;
+    }
+}
